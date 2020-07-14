@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "description": "A recipe database and meal planner",
   "scripts": {
-    "start:server": "node -r dotenv/config --experimental-modules src/server/index.js",
+    "start:server": "nodemon src/server/index.js",
     "start:browser": "node scripts/start.js",
     "build:browser": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "lint": "eslint src"
+    "lint": "eslint --max-warnings 0 src"
   },
   "author": "Fabian Gut <fabian.gut@ethy.ch>",
   "license": "MIT",
@@ -29,13 +29,21 @@
       "last 1 safari version"
     ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/inert": "^6.0.1",
+    "dotenv": "8.2.0",
+    "dotenv-expand": "5.1.0",
+    "esm": "^3.2.25",
+    "mariadb": "^2.4.1"
+  },
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^26.0.4",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "babel-eslint": "10.1.0",
@@ -46,8 +54,6 @@
     "camelcase": "^5.3.1",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
     "css-loader": "3.4.2",
-    "dotenv": "8.2.0",
-    "dotenv-expand": "5.1.0",
     "eslint": "^6.6.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-loader": "3.0.3",
@@ -59,12 +65,14 @@
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-beta.11",
+    "http-proxy-middleware": "^1.0.5",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",
     "jest-environment-jsdom-fourteen": "1.0.1",
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
     "mini-css-extract-plugin": "0.9.0",
+    "nodemon": "^2.0.4",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -89,6 +97,7 @@
     "webpack-manifest-plugin": "2.2.0",
     "workbox-webpack-plugin": "4.3.1"
   },
+  "proxy": "http://localhost:8080",
   "jest": {
     "roots": [
       "<rootDir>/src"
@@ -101,7 +110,7 @@
       "react-app-polyfill/jsdom"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
+      "<rootDir>/src/browser/setupTests.js"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
@@ -142,6 +151,21 @@
   "babel": {
     "presets": [
       "react-app"
+    ]
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src/server"
+    ],
+    "ignore": [
+      "*.test.js"
+    ],
+    "exec": "node",
+    "nodeArgs": [
+      "-r",
+      "dotenv/config",
+      "-r",
+      "esm"
     ]
   }
 }

@@ -1,0 +1,24 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.1
+jobs:
+  build-and-test:
+    executor:
+      name: node/default
+      tag: '12.18.2'
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: Linting
+          command: npm run lint
+      - run:
+          name: Run Tests
+          command: npm test
+      - run:
+          name: Build Browser
+          command: npm run build:browser
+workflows:
+    build-and-test:
+      jobs:
+        - build-and-test
