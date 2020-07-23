@@ -29,11 +29,11 @@ const init = async () => {
         index: 'index.html'
       }
     }
-  })
+  });
 
   await server.start();
   console.log('Server running on %s', server.info.uri);
-}
+};
 
 process.on('unhandledRejection', err => {
   console.error(err);

@@ -3,6 +3,6 @@ const apiPlugin = {
   register: async function(server) {
 
   }
-}
+};
 
 export default apiPlugin;
