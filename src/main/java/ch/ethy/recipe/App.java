@@ -3,9 +3,6 @@ package ch.ethy.recipe;
 import io.undertow.*;
 import io.undertow.util.*;
 
-/**
- * Hello world!
- */
 public class App {
   public static void main(String[] args) {
     Undertow server = Undertow.builder()
