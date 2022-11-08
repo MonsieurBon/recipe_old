@@ -9,7 +9,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:no-watch": "ng test --no-watch",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prettier": "npx prettier --check src/main/webapp",
+    "format:check": "npm run lint && npm run prettier"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "5.37.0",
     "@typescript-eslint/parser": "5.37.0",
     "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -45,6 +48,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "prettier": "2.7.1",
+    "prettier-plugin-java": "1.6.2",
     "typescript": "~4.7.2"
   },
   "engines": {

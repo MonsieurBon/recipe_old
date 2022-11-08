@@ -19,6 +19,7 @@
     <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
     <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+    <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
 
     <!-- webapp -->
     <node.version>18.12.0</node.version>
@@ -104,24 +105,39 @@
             </configuration>
           </execution>
           <execution>
-            <id>webapp tests</id>
+            <id>test webapp</id>
             <goals>
               <goal>npm</goal>
             </goals>
             <phase>test</phase>
             <configuration>
-              <arguments>test:no-watch</arguments>
+              <arguments>run test:no-watch</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>check java format</id>
+            <goals>
+              <goal>npx</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <arguments>prettier --check src/main/java src/test/java</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>check webapp format</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <arguments>run format:check</arguments>
             </configuration>
           </execution>
         </executions>
         <configuration>
           <nodeVersion>v${node.version}</nodeVersion>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -146,6 +162,28 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven-checkstyle-plugin.version}</version>
+        <configuration>
+          <configLocation>checkstyle.xml</configLocation>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <violationSeverity>info</violationSeverity>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
       </plugin>
     </plugins>
   </build>

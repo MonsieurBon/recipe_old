@@ -1,14 +1,13 @@
 package ch.ethy.recipe;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class AppTest {
+
   @Test
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+  public void testApp() {
+    assertTrue(true);
+  }
 }

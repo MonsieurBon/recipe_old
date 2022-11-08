@@ -3,6 +3,9 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
+  "extends": [
+    "prettier"
+  ],
   "overrides": [
     {
       "files": [
