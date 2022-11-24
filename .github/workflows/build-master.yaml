@@ -12,23 +12,46 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Cache node modules
-        uses: actions/cache@v2
+
+      - uses: actions/setup-node@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
           java-version: '18'
           distribution: 'temurin'
           cache: maven
-      - name: Build with Maven
+
+      - name: Compile and test Java
+        run: mvn -B test
+
+      - name: NPM install
+        run: npm ci
+
+      - name: Check Java formatting
+        run: npx prettier --check src/main/java src/test/java
+
+      - name: Check webapp formatting
+        run: npm run format:check
+
+      - name: Test webapp
+        run: npm run test:no-watch
+
+      - name: Build angular
+        run: npm run build
+
+      - name: Package and verify webapp
         run: mvn -B verify
+
       - name: Update dependency graph
         uses: advanced-security/maven-dependency-submission-action@v1
-      - name: Build the Docker image
-        run: DOCKER_BUILDKIT=1 docker build . -t recipe:$(date +%s)
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: false
 

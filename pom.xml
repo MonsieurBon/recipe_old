@@ -4,7 +4,7 @@
 
   <groupId>ch.ethy</groupId>
   <artifactId>recipe</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.source>18</maven.compiler.source>
@@ -16,17 +16,9 @@
     <undertow.version>2.3.0.Final</undertow.version>
 
     <!-- plugins -->
-    <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
     <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
-
-    <!-- webapp -->
-    <node.version>18.12.0</node.version>
-    <webapp.skip-npm-install>false</webapp.skip-npm-install>
-    <webapp.skip-npm-ci>true</webapp.skip-npm-ci>
-    <webapp.skip-dev-build>false</webapp.skip-dev-build>
-    <webapp.skip-prod-build>true</webapp.skip-prod-build>
   </properties>
 
   <packaging>jar</packaging>
@@ -49,96 +41,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
-        <version>${frontend-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>install node and npm</id>
-            <goals>
-              <goal>install-node-and-npm</goal>
-            </goals>
-            <phase>generate-resources</phase>
-          </execution>
-          <execution>
-            <id>npm install</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <skip>${webapp.skip-npm-install}</skip>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm ci</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <skip>${webapp.skip-npm-ci}</skip>
-              <arguments>ci</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>build webapp dev</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>compile</phase>
-            <configuration>
-              <skip>${webapp.skip-dev-build}</skip>
-              <arguments>run build:dev</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>build webapp prod</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>compile</phase>
-            <configuration>
-              <skip>${webapp.skip-prod-build}</skip>
-              <arguments>run build</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>test webapp</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>test</phase>
-            <configuration>
-              <arguments>run test:no-watch</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>check java format</id>
-            <goals>
-              <goal>npx</goal>
-            </goals>
-            <phase>verify</phase>
-            <configuration>
-              <arguments>prettier --check src/main/java src/test/java</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>check webapp format</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>verify</phase>
-            <configuration>
-              <arguments>run format:check</arguments>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <nodeVersion>v${node.version}</nodeVersion>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -187,15 +89,4 @@
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>CI</id>
-      <properties>
-        <webapp.skip-npm-install>true</webapp.skip-npm-install>
-        <webapp.skip-npm-ci>false</webapp.skip-npm-ci>
-        <webapp.skip-dev-build>true</webapp.skip-dev-build>
-        <webapp.skip-prod-build>false</webapp.skip-prod-build>
-      </properties>
-    </profile>
-  </profiles>
 </project>
