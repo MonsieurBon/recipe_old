@@ -40,7 +40,7 @@ jobs:
           cache: maven
 
       - name: Set maven version
-        run: mvn version:set -DnewVersion=${{ env.VERSION }}
+        run: mvn versions:set -DnewVersion=${{ env.VERSION }}
 
       - name: Set webapp version
         run: npm version ${{ env.VERSION }}
@@ -99,7 +99,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Bump maven version
-        run: mvn version:set -DnextSnapshot=true -DgenerateBackupPoms=false
+        run: mvn versions:set -DnextSnapshot=true -DgenerateBackupPoms=false
 
       - name: Bump frontend version
         run: npm version patch
