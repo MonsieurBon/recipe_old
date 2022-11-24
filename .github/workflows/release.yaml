@@ -43,7 +43,7 @@ jobs:
         run: mvn versions:set -DnewVersion=${{ env.VERSION }}
 
       - name: Set webapp version
-        run: npm version ${{ env.VERSION }}
+        run: npm version --allow-same-version --git-tag-version=false ${{ env.VERSION }}
 
       - name: Compile and test Java
         run: mvn -B test
@@ -102,7 +102,7 @@ jobs:
         run: mvn versions:set -DnextSnapshot=true -DgenerateBackupPoms=false
 
       - name: Bump frontend version
-        run: npm version patch
+        run: npm version --git-tag-version=false patch
 
       - name: Commit and push to master
         run: |
