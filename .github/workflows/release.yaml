@@ -55,10 +55,10 @@ jobs:
         run: npx prettier --check src/main/java src/test/java
 
       - name: Check webapp formatting
-        run: npm format:check
+        run: npm run format:check
 
       - name: Test webapp
-        run: npm test:no-watch
+        run: npm run test:no-watch
 
       - name: Build angular
         run: npm run build
