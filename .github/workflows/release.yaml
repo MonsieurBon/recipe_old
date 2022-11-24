@@ -1,0 +1,112 @@
+name: Release recipe
+
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  push_docker_image:
+    name: Push docker image to Github Repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Set VERSION from tag
+        run: |
+          TAG=${{ GITHUB_REF_NAME }}
+          echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '18'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Set maven version
+        run: mvn version:set -DnewVersion=${{ env.VERSION }}
+
+      - name: Set webapp version
+        run: npm version ${{ env.VERSION }}
+
+      - name: Compile and test Java
+        run: mvn -B test
+
+      - name: NPM install
+        run: npm ci
+
+      - name: Check Java formatting
+        run: npx prettier --check src/main/java src/test/java
+
+      - name: Check webapp formatting
+        run: npm format:check
+
+      - name: Test webapp
+        run: npm test:no-watch
+
+      - name: Build angular
+        run: npm run build
+
+      - name: Package and verify webapp
+        run: mvn -B verify
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/recipe-${{ env.VERSION }}.jar
+          generate_release_notes: true
+
+      - name: Log in to Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}},value=${{ env.VERSION }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ env.VERSION }}
+            type=semver,pattern={{major}},value=${{ env.VERSION }}
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Bump maven version
+        run: mvn version:set -DnextSnapshot=true -DgenerateBackupPoms=false
+
+      - name: Bump frontend version
+        run: npm version patch
+
+      - name: Commit and push to master
+        run: |
+          git config --global user.name 'Github Release'
+          git config --global user.email 'release@github.com'
+          git commit -am "Bumped version after release"
+          git push origin HEAD:master
