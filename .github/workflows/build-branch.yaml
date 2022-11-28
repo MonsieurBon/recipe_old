@@ -1,4 +1,4 @@
-name: Recipe Build Branch
+name: Build Branch
 
 on:
   push:
