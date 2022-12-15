@@ -38,7 +38,7 @@ jobs:
         run: npm ci
 
       - name: Test webapp
-        run: npm run test
+        run: npm run test:ci
 
       - name: Release
         run: npx semantic-release
