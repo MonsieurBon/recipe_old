@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/npm",
+    ["@semantic-release/exec", {
+      "prepareCmd": "mvn versions:set -DnewVersion=${nextRelease.version}",
+      "publishCmd": "npm run build && mvn -B package"
+    }],
+    ["@semantic-release/github", {
+      "assets": "target/recipe-*.jar"
+    }]
+  ]
+}
