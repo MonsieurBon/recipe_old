@@ -5,7 +5,8 @@
     "@semantic-release/npm",
     ["@semantic-release/exec", {
       "prepareCmd": "mvn versions:set -DnewVersion=${nextRelease.version}",
-      "publishCmd": "npm run build && mvn -B package"
+      "publishCmd": "npm run build && mvn -B package",
+      "successCmd": "echo 'NEXT_RELEASE_VERSION=${nextRelease.version}' >> $GITHUB_ENV"
     }],
     ["@semantic-release/github", {
       "assets": "target/recipe-*.jar"
