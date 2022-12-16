@@ -9,7 +9,13 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "fix"
+      prefix-development: "build"
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "fix"
+      prefix-development: "build"
