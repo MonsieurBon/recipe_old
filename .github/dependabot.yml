@@ -13,3 +13,12 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      angular:
+        patterns:
+          - "@angular/*"
+          - "@angular-devkit/*"
+      jasmine:
+        patterns:
+          - "@types/jasmine"
+          - "jasmine-core"
