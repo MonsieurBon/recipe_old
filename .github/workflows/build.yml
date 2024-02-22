@@ -31,7 +31,7 @@ jobs:
         run: mvn spotless:check
 
       - name: test frontend
-        run: npm test
+        run: npm run test:headless
 
       - name: test backend
         run: mvn test
