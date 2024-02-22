@@ -18,6 +18,11 @@ updates:
         patterns:
           - "@angular/*"
           - "@angular-devkit/*"
+      eslint:
+        patterns:
+          - "@angular-eslint/*"
+          - "@typescript-eslint/*"
+          - "eslint"
       jasmine:
         patterns:
           - "@types/jasmine"
