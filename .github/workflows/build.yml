@@ -28,16 +28,16 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: lint backend
-        run: mvn spotless:check
+        run: mvn -B spotless:check
 
       - name: test frontend
         run: npm run test:headless
 
       - name: test backend
-        run: mvn test
+        run: mvn -B test
 
       - name: build frontend
         run: npm run build
 
       - name: build backend
-        run: mvn -DskipTests=true clean install
+        run: mvn -B -DskipTests=true clean install
