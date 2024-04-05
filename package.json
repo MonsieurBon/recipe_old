@@ -70,7 +70,7 @@
         {
           "prepareCmd": "mvn -B versions:set -DnewVersion=\"${nextRelease.version}\"",
           "publishCmd": "npm run build && mvn clean package -DskipTests=true",
-          "success": "NEXT_VERSION=$(npm version $(npm version patch --no-git-tag-version)-SNAPSHOT --no-git-tag-version) && echo $NEXT_VERSION && mvn -B versions:set -DnewVersion=$NEXT_VERSION -DgenerateBackupPoms=false && git status && git commit -am \"chore(release): $NEXT_VERSION [skip ci]\" && git log -n 1 && git push"
+          "successCmd": "NEXT_VERSION=$(npm version $(npm version patch --no-git-tag-version)-SNAPSHOT --no-git-tag-version) && echo $NEXT_VERSION && mvn -B versions:set -DnewVersion=$NEXT_VERSION -DgenerateBackupPoms=false && git status && git commit -am \"chore(release): $NEXT_VERSION [skip ci]\" && git log -n 1 && git push"
         }
       ],
       [
