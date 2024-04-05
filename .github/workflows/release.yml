@@ -40,7 +40,7 @@ jobs:
           cache: maven
 
       - name: build backend
-        run: mvn clean test
+        run: mvn -B clean test
 
       - name: Release
         env:
