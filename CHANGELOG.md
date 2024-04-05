@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/MonsieurBon/recipe/compare/v1.0.4...v1.0.5) (2024-04-05)
+
+
+### Bug Fixes
+
+* build ([473094b](https://github.com/MonsieurBon/recipe/commit/473094b281828974d63c96bb89ec1ae248ca4e3b))
+
 ## [1.0.4](https://github.com/MonsieurBon/recipe/compare/v1.0.3...v1.0.4) (2024-04-05)
 
 
