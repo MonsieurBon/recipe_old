@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/MonsieurBon/recipe/compare/v1.0.7...v1.0.8) (2024-04-05)
+
+
+### Bug Fixes
+
+* add docker release ([6755239](https://github.com/MonsieurBon/recipe/commit/6755239cdbd67728b5c30eebabe40ceb1bce6076))
+
 ## [1.0.7](https://github.com/MonsieurBon/recipe/compare/v1.0.6...v1.0.7) (2024-04-05)
 
 
