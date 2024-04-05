@@ -96,6 +96,12 @@
             }
           ]
         }
+      ],
+      [
+        "@semantic-release-plus/docker",
+        {
+          "name": "ghcr.io/monsieurbon/recipe:latest,ghcr.io/monsieurbon/recipe:${nextRelease.version}"
+        }
       ]
     ]
   }
