@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/MonsieurBon/recipe/compare/v1.0.8...v1.0.9) (2024-04-05)
+
+
+### Bug Fixes
+
+* added docker build plugin ([28ec05e](https://github.com/MonsieurBon/recipe/commit/28ec05e4fd23b4ee0d195c42ae9fb3a7421aa0f5))
+
 ## [1.0.8](https://github.com/MonsieurBon/recipe/compare/v1.0.7...v1.0.8) (2024-04-05)
 
 
