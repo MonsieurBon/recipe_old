@@ -55,11 +55,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-      - name: set next development version
-        run: mvn -B versions:set -DnextSnapshot=true -DgenerateBackupPoms=false
-      - run: echo "npm-next-version=$(npm version patch --no-git-tag-version)" >> $GITHUB_OUTPUT
-        id: npm_next_version
-      - run: npm version ${{ steps.npm_next_version.outputs.npm-next-version }}-SNAPSHOT --no-git-tag-version
       - run: |
           git config --global user.name 'version-bump'
           git config --global user.email 'noreply@ethy.ch'
