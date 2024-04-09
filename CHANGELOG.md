@@ -1,3 +1,23 @@
+# 1.0.0 (2024-04-09)
+
+
+### Bug Fixes
+
+* add docker release ([6755239](https://github.com/MonsieurBon/recipe/commit/6755239cdbd67728b5c30eebabe40ceb1bce6076))
+* added docker build plugin ([28ec05e](https://github.com/MonsieurBon/recipe/commit/28ec05e4fd23b4ee0d195c42ae9fb3a7421aa0f5))
+* build ([76f046b](https://github.com/MonsieurBon/recipe/commit/76f046bfca2b18b83eedc580f41bae2ca1ec61aa))
+* build ([d4e2354](https://github.com/MonsieurBon/recipe/commit/d4e2354ccb3298875a81ba738e0816f1e72e7c05))
+* build ([e0f892c](https://github.com/MonsieurBon/recipe/commit/e0f892c7493108d6c0d12e4ccc46a6484243efe7))
+* build ([f365ef0](https://github.com/MonsieurBon/recipe/commit/f365ef0215f0f0ee346c3687229b00dc87c63ddb))
+* build ([59b04df](https://github.com/MonsieurBon/recipe/commit/59b04df5a04fc3328ad9daef50f0b255a050a89f))
+* build ([9ef00d0](https://github.com/MonsieurBon/recipe/commit/9ef00d0f4cfca44d993ddba8d565bfb900c1923e))
+* build ([473094b](https://github.com/MonsieurBon/recipe/commit/473094b281828974d63c96bb89ec1ae248ca4e3b))
+* build ([4160d04](https://github.com/MonsieurBon/recipe/commit/4160d0430ece3b76ab6c859915e4875a9fe6be54))
+* fix build ([555996d](https://github.com/MonsieurBon/recipe/commit/555996d3668430c5cc7254042c1e2175d15aa67c))
+* fix build ([bfbb188](https://github.com/MonsieurBon/recipe/commit/bfbb18860b1c35dab7dca3af3f4e94b898f90287))
+* fix release workflow ([bbaec7f](https://github.com/MonsieurBon/recipe/commit/bbaec7f4c8201253f4a19ee4f845e4f7211858eb))
+* **release:** fix release build for non release commits ([fb672dc](https://github.com/MonsieurBon/recipe/commit/fb672dc31b79a693a214a520ce6655d9312e6694))
+
 ## [1.0.12](https://github.com/MonsieurBon/recipe/compare/v1.0.11...v1.0.12) (2024-04-09)
 
 
