@@ -100,10 +100,9 @@
       [
         "@semantic-release-plus/docker",
         {
-          "name": "monsieurbon/recipe",
+          "name": "monsieurbon/recipe:build",
           "registry": "ghcr.io",
-          "skipLogin": true,
-          "tag": "build"
+          "skipLogin": true
         }
       ]
     ]
