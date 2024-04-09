@@ -100,7 +100,9 @@
       [
         "@semantic-release-plus/docker",
         {
-          "name": "ghcr.io/monsieurbon/recipe:latest,ghcr.io/monsieurbon/recipe:${nextRelease.version}"
+          "name": "monsieurbon/recipe:latest,monsieurbon/recipe:${nextRelease.version}",
+          "registry": "ghcr.io",
+          "skipLogin": true
         }
       ]
     ]
